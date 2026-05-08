@@ -1,0 +1,371 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.55 0.25 250); /* Premium Deep Blue/Cyan */
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.06 0.015 230); /* Deep Ocean Midnight */
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.10 0.02 230);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.10 0.02 230);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.70 0.20 195); /* Luminous Teal */
+  --primary-foreground: oklch(0.06 0.015 230);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.14 0.02 230);
+  --muted-foreground: oklch(0.65 0.02 230);
+  --accent: oklch(0.14 0.02 230);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.16 0.02 230);
+  --input: oklch(0.16 0.02 230);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.70 0.20 195);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.08 0.02 230);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.70 0.20 195);
+  --sidebar-primary-foreground: oklch(0.06 0.015 230);
+  --sidebar-accent: oklch(0.14 0.02 230);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.16 0.02 230);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+}
+
+/* ─── Premium Glassmorphism ─── */
+.glass {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .glass {
+  background: rgba(8, 15, 30, 0.55);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-strong {
+  background: rgba(8, 15, 30, 0.75);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 9999px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+/* ─── Animated Mesh Background (Ocean Theme) ─── */
+.bg-mesh {
+  background-color: hsl(220, 55%, 5%);
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(195, 100%, 12%, 0.6) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(210, 100%, 8%, 0.5) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(185, 100%, 12%, 0.6) 0px, transparent 50%),
+    radial-gradient(at 70% 70%, hsla(200, 100%, 8%, 0.4) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(220, 100%, 10%, 0.3) 0px, transparent 50%);
+}
+
+/* ─── Water Caustics Overlay ─── */
+.water-caustics {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%2300bcd4' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 702 802 711 720 723 758 754 787 791 741 757 714'/%3E%3Cpath d='M295 764L289 736 280 714 273 737 280 755 286 767'/%3E%3Cpath d='M576 803L594 789 577 773 559 789'/%3E%3Cpath d='M406 617L386 635 401 654 421 636'/%3E%3Ccircle cx='420' cy='410' r='60'/%3E%3Ccircle cx='700' cy='200' r='80'/%3E%3Ccircle cx='200' cy='600' r='40'/%3E%3C/g%3E%3C/svg%3E");
+  animation: caustics-drift 25s ease-in-out infinite alternate;
+}
+
+@keyframes caustics-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, -15px) scale(1.05); }
+  100% { transform: translate(20px, 15px) scale(0.95); }
+}
+
+/* ─── Water Ripple Effect ─── */
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(0, 188, 212, 0.25);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 2s infinite;
+}
+
+/* ─── Floating Bubbles ─── */
+@keyframes bubble-float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(0, 188, 212, 0.15), rgba(0, 150, 200, 0.05));
+  border: 1px solid rgba(0, 188, 212, 0.1);
+  pointer-events: none;
+}
+
+/* ─── Neon Glow Effects ─── */
+.glow-teal {
+  box-shadow: 0 0 20px rgba(0, 188, 212, 0.15), 0 0 60px rgba(0, 188, 212, 0.05);
+}
+
+.glow-teal-strong {
+  box-shadow: 0 0 25px rgba(0, 188, 212, 0.25), 0 0 80px rgba(0, 188, 212, 0.1);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.05);
+}
+
+.text-glow-teal {
+  text-shadow: 0 0 20px rgba(0, 188, 212, 0.3), 0 0 40px rgba(0, 188, 212, 0.1);
+}
+
+.text-glow-white {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Premium Card Hover Effects ─── */
+.card-premium {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-premium:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 188, 212, 0.08);
+}
+
+/* ─── Animated Gradient Border ─── */
+@keyframes gradient-border {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-border {
+  position: relative;
+  z-index: 1;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.3), rgba(59, 130, 246, 0.1), rgba(0, 188, 212, 0.3));
+  background-size: 200% 200%;
+  animation: gradient-border 4s ease infinite;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ─── Glare Animation ─── */
+@keyframes glare {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(150%) skewX(-15deg); }
+}
+
+.animate-glare {
+  animation: glare 1.5s ease-in-out;
+}
+
+/* ─── Water Wave Shimmer ─── */
+@keyframes shimmer-wave {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-wave {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 188, 212, 0.06) 25%,
+    rgba(0, 188, 212, 0.12) 50%,
+    rgba(0, 188, 212, 0.06) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-wave 3s ease-in-out infinite;
+}
+
+/* ─── Pulse Ring (for live indicators) ─── */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* ─── Sidebar Glow Line ─── */
+.sidebar-glow-line {
+  position: relative;
+}
+
+.sidebar-glow-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 188, 212, 0.2), transparent);
+}
+
+/* ─── KPI Card Shine ─── */
+@keyframes kpi-shine {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.kpi-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  animation: kpi-shine 4s ease-in-out infinite;
+}
+
+/* ─── Dot Grid Pattern ─── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0, 188, 212, 0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ─── Water Level Gauge ─── */
+@keyframes water-sway {
+  0%, 100% { d: path("M 0 0 Q 25 -3 50 0 T 100 0 L 100 100 L 0 100 Z"); }
+  50% { d: path("M 0 0 Q 25 3 50 0 T 100 0 L 100 100 L 0 100 Z"); }
+}
+
+/* ─── Focus Ring Improvements ─── */
+*:focus-visible {
+  outline: 2px solid rgba(0, 188, 212, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── Page Transition ─── */
+.page-enter {
+  animation: page-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
