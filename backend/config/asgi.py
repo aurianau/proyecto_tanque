@@ -12,12 +12,16 @@ django_asgi_app = get_asgi_application()
 
 from consumers.telemetry_consumer import TelemetryConsumer
 
+from channels.security.websocket import AllowedHostsOriginValidator
+
 application = ProtocolTypeRouter({
     "http": django_asgi_app,
-    "websocket": AuthMiddlewareStack(
-        URLRouter([
-            path("ws/telemetry/", TelemetryConsumer.as_asgi()),
-            path("ws/telemetry/<str:community_id>/", TelemetryConsumer.as_asgi()),
-        ])
+    "websocket": AllowedHostsOriginValidator(
+        AuthMiddlewareStack(
+            URLRouter([
+                path("ws/telemetry/", TelemetryConsumer.as_asgi()),
+                path("ws/telemetry/<str:community_id>/", TelemetryConsumer.as_asgi()),
+            ])
+        )
     ),
 })
