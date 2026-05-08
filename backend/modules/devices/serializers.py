@@ -22,4 +22,4 @@ class TankSerializer(serializers.ModelSerializer):
 class MicrocontrollerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Microcontroller
-        fields = '__all__'
+        exclude = ['ip_address']
