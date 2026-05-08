@@ -42,7 +42,14 @@ export default function DashboardPage() {
   const [tankStates, setTankStates] = useState<Record<string, any>>({});
   const [isWsConnected, setIsWsConnected] = useState(false);
 
-  const WS_URL = "ws://127.0.0.1:8000/ws/telemetry/global/";
+  const getWsUrl = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+    const wsProtocol = apiUrl.startsWith("https") ? "wss" : "ws";
+    const host = apiUrl.replace("http://", "").replace("https://", "").split("/")[0];
+    return `${wsProtocol}://${host}/ws/telemetry/global/`;
+  };
+
+  const WS_URL = getWsUrl();
   
   const handleWebSocketMessage = useCallback((msg: WebSocketMessage) => {
     if (msg.type === "telemetry_update" && msg.message?.data?.tanks) {
