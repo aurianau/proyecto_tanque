@@ -4,6 +4,7 @@ from .views import MicrocontrollerViewSet, TankViewSet, SensorViewSet, ValveView
 
 router = DefaultRouter()
 router.register(r'microcontrollers', MicrocontrollerViewSet)
+router.register(r'micro-controllers', MicrocontrollerViewSet)
 router.register(r'tanks', TankViewSet)
 router.register(r'sensors', SensorViewSet)
 router.register(r'valves', ValveViewSet)
