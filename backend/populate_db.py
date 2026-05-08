@@ -10,7 +10,7 @@ from modules.devices.models import Microcontroller, Tank, Sensor, Valve
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-admin = User.objects.get(id=1)
+admin = User.objects.get(username='admin')
 
 def populate():
     # 1. Update existing community 'aremasai' to a correct location
