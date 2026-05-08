@@ -19,7 +19,8 @@ Incremental==24.11.0
 msgpack==1.1.2
 packaging==26.2
 dj-database-url==2.1.0
-psycopg2-binary==2.9.9
+psycopg2-binary
 whitenoise==6.6.0
 gunicorn==22.0.0
 python-dotenv==1.0.1
+psycopg[binary]
