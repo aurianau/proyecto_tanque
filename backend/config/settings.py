@@ -22,7 +22,11 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*'] # In production you should set this to your Railway domain
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://proyectotanque-production.up.railway.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -89,13 +93,22 @@ ASGI_APPLICATION = 'config.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# Check if we are on Railway or if DATABASE_URL is explicitly provided
+if os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
 
 # PostgreSQL structure (placeholder for production)
 # DATABASES = {
