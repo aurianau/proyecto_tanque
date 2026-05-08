@@ -20,8 +20,6 @@ class TankSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class MicrocontrollerSerializer(serializers.ModelSerializer):
-    tanks = TankSerializer(many=True, read_only=True)
-
     class Meta:
         model = Microcontroller
         fields = '__all__'
